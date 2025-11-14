@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { motion } from "framer-motion";
@@ -42,7 +43,6 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-center h-20">
-            {/* Logo - Clean and Simple */}
             <motion.div
               className="flex items-center"
               initial={{ opacity: 0, x: -20 }}
@@ -50,28 +50,16 @@ const Navbar = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <motion.div
-                className="bg-burning-flame text-blue-fantastic px-6 py-2.5 rounded-xl font-bold border-2 border-transparent relative overflow-hidden group"
-                whileHover={{
-                  scale: 1.05,
-                }}
+                className="relative overflow-hidden group w-12 h-12 sm:w-14 sm:h-14"
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400 }}
               >
-                <span className="relative z-10">ي</span>
-                {/* Button Shine Effect */}
-                <motion.div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-
-                {/* Pulse Effect */}
-                <motion.div
-                  className="absolute inset-0 border-2 border-burning-flame rounded-xl"
-                  animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.5, 0.8, 0.5],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                  }}
+                {/* SVG as Image */}
+                <img
+                  src="./logo.svg"
+                  alt="Logo"
+                  className="w-full h-full object-contain relative z-10 transition-all duration-300 group-hover:scale-110"
                 />
               </motion.div>
             </motion.div>

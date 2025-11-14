@@ -31,7 +31,7 @@ const Page = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-linear-to-br from-blue-fantastic to-abyssal-blue relative overflow-hidden">
+    <section className="min-h-screen flex items-center justify-center bg-[linear-gradient(to_bottom,var(--blue-fantastic),var(--truffle-trouble),var(--burning-flame))] relative overflow-hidden">
       {/* PERFORMANCE: Reduced particles to 20 with optimized animations */}
       <div className="absolute inset-0">
         {[...Array(30)].map((_, i) => (
@@ -256,24 +256,6 @@ const Page = () => {
           </button>
         </motion.div>
       </div>
-
-      {/* Add custom animation for pulse */}
-      <style jsx>{`
-        @keyframes pulse-slow {
-          0%,
-          100% {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.6;
-            transform: scale(1.02);
-          }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 3s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 };

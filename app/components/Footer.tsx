@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { motion } from "framer-motion";
@@ -43,7 +44,7 @@ const Footer = () => {
 
   return (
     <footer
-      className="bg-linear-to-t from-blue-fantastic to-abyssal-blue text-palladian relative overflow-hidden"
+      className="bg-linear-to-b from-blue-fantastic to-abyssal-blue text-palladian relative overflow-hidden"
       dir="rtl"
     >
       {/* Static background elements - no animation for performance */}
@@ -65,9 +66,19 @@ const Footer = () => {
             {/* Brand Column */}
             <motion.div className="lg:col-span-1" variants={itemVariants}>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-burning-flame rounded-xl flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105 hover:rotate-2">
-                  <span className="text-white font-bold text-xl">ي</span>
-                </div>
+                <motion.div
+                  className="relative overflow-hidden group w-12 h-12 sm:w-14 sm:h-14"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  {/* SVG as Image */}
+                  <img
+                    src="./logo.svg"
+                    alt="Logo"
+                    className="w-full h-full object-contain relative z-10 transition-all duration-300 group-hover:scale-110"
+                  />
+                </motion.div>
                 <h3 className="text-xl font-bold">مؤسسة يوسف اللوجي</h3>
               </div>
 
@@ -164,7 +175,7 @@ const Footer = () => {
                   {
                     icon: "📞",
                     label: "هاتف",
-                    value: "963996320963+",
+                    value: "963 996 320 963+",
                   },
                   {
                     icon: "📧",
