@@ -31,6 +31,9 @@ export default async function RootLayout({
       dir={isRTL ? "rtl" : "ltr"}
       className={isRTL ? "rtl" : "ltr"}
     >
+      <head>
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+      </head>
       <body
         className={`${cairo.variable} font-sans antialiased ${
           isRTL ? "rtl" : "ltr"
