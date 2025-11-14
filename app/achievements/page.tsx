@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-const page = () => {
+const Page = () => {
   const achievements = [
     {
       number: "95%",
@@ -70,51 +70,84 @@ const page = () => {
     },
   ];
 
+  // Optimized variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const achievementVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
+      },
+    },
+  };
+
+  const scopeVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
+      },
+    },
+  };
+
+  const locationVariants = {
+    hidden: { opacity: 0, x: 10 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative py-40 bg-linear-to-br from-blue-fantastic to-abyssal-blue text-palladian overflow-hidden">
-        {/* Background Elements */}
+        {/* PERFORMANCE: Static background elements */}
         <div className="absolute inset-0">
-          <motion.div
-            className="absolute top-20 left-20 w-40 h-40 bg-burning-flame/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          <motion.div
-            className="absolute bottom-20 right-20 w-32 h-32 bg-truffle-trouble/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1.2, 1, 1.2],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2,
-            }}
-          />
+          <div className="absolute top-20 left-20 w-40 h-40 bg-burning-flame/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-20 w-32 h-32 bg-truffle-trouble/10 rounded-full blur-3xl" />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             className="text-center max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{
+              duration: 0.8,
+              ease: [0.25, 0.46, 0.45, 0.94] as const,
+            }}
           >
             <motion.h1
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{
+                duration: 0.7,
+                delay: 0.2,
+                ease: [0.25, 0.46, 0.45, 0.94] as const,
+              }}
             >
               إنجازاتنا
             </motion.h1>
@@ -122,7 +155,11 @@ const page = () => {
               className="text-xl sm:text-2xl text-burning-flame font-semibold"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{
+                duration: 0.6,
+                delay: 0.4,
+                ease: "easeOut" as const,
+              }}
             >
               أرقام تدل على تميزنا... إنجازات تتحدث عن نفسها
             </motion.p>
@@ -134,13 +171,16 @@ const page = () => {
       <section className="py-20 bg-abyssal-blue">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-16"
-            initial={{ opacity: 0, y: 30 }}
+            className="text-center max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "0px", amount: 0.1 }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{
+              duration: 0.7,
+              ease: [0.25, 0.46, 0.45, 0.94] as const,
+            }}
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-4">
               أرقام تدل على تميزنا
             </h2>
             <p className="text-lg text-palladian/70">
@@ -148,76 +188,52 @@ const page = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
             {achievements.map((achievement, index) => (
               <motion.div
                 key={index}
-                className="bg-blue-fantastic rounded-2xl shadow-xl border border-palladian/20 p-6 sm:p-8 relative overflow-hidden group hover:shadow-2xl transition-all duration-300"
-                initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "0px", amount: 0.1 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
+                className="bg-blue-fantastic rounded-2xl shadow-xl border border-palladian/20 p-5 sm:p-6 relative overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                variants={achievementVariants}
+                transition={{ delay: index * 0.1 }}
               >
                 {/* Decorative Corner */}
                 <div
-                  className={`absolute top-0 right-0 w-20 h-20 bg-linear-to-br ${achievement.color} rounded-bl-3xl opacity-20`}
+                  className={`absolute top-0 right-0 w-16 h-16 bg-linear-to-br ${achievement.color} rounded-bl-3xl opacity-20`}
                 />
 
                 {/* Achievement Content */}
                 <div className="text-center relative z-10">
                   {/* Icon */}
-                  <motion.div
-                    className={`w-16 h-16 rounded-xl bg-linear-to-r ${achievement.color} flex items-center justify-center text-2xl text-white mb-4 mx-auto`}
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 + 0.3 }}
+                  <div
+                    className={`w-12 h-12 rounded-xl bg-linear-to-r ${achievement.color} flex items-center justify-center text-xl text-white mb-3 mx-auto transition-transform duration-300 group-hover:scale-110`}
                   >
                     {achievement.icon}
-                  </motion.div>
+                  </div>
 
                   {/* Number */}
-                  <motion.h3
-                    className="text-3xl sm:text-4xl font-bold text-burning-flame mb-2"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: 0.6,
-                      delay: index * 0.1 + 0.4,
-                      type: "spring",
-                      stiffness: 200,
-                    }}
-                  >
+                  <h3 className="text-2xl sm:text-3xl font-bold text-burning-flame mb-1">
                     {achievement.number}
-                  </motion.h3>
+                  </h3>
 
                   {/* Label */}
-                  <motion.h4
-                    className="text-xl font-bold text-palladian mb-3"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 + 0.5 }}
-                  >
+                  <h4 className="text-lg font-bold text-palladian mb-2">
                     {achievement.label}
-                  </motion.h4>
+                  </h4>
 
                   {/* Description */}
-                  <motion.p
-                    className="text-palladian/80 text-sm leading-relaxed"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 + 0.6 }}
-                  >
+                  <p className="text-palladian/80 text-sm leading-relaxed">
                     {achievement.description}
-                  </motion.p>
+                  </p>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -225,13 +241,16 @@ const page = () => {
       <section className="py-20 bg-blue-fantastic">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-16"
-            initial={{ opacity: 0, y: 30 }}
+            className="text-center max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "0px", amount: 0.1 }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{
+              duration: 0.7,
+              ease: [0.25, 0.46, 0.45, 0.94] as const,
+            }}
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-4">
               نطاق عملنا الجغرافي
             </h2>
             <p className="text-lg text-palladian/70">
@@ -239,79 +258,64 @@ const page = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <motion.div
+            className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+          >
             {geographicScope.map((scope, index) => (
               <motion.div
                 key={index}
-                className="bg-abyssal-blue rounded-2xl shadow-xl border border-palladian/20 p-6 sm:p-8 relative overflow-hidden group hover:shadow-2xl transition-all duration-300"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "0px", amount: 0.1 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                whileHover={{ y: -5 }}
+                className="bg-abyssal-blue rounded-2xl shadow-xl border border-palladian/20 p-5 sm:p-6 relative overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                variants={scopeVariants}
+                transition={{ delay: index * 0.15 }}
               >
                 {/* Decorative Corner */}
                 <div
-                  className={`absolute top-0 right-0 w-20 h-20 bg-linear-to-br ${scope.color} rounded-bl-3xl opacity-20`}
+                  className={`absolute top-0 right-0 w-16 h-16 bg-linear-to-br ${scope.color} rounded-bl-3xl opacity-20`}
                 />
 
                 {/* Scope Content */}
                 <div className="text-center relative z-10">
                   {/* Icon */}
-                  <motion.div
-                    className={`w-16 h-16 rounded-xl bg-linear-to-r ${scope.color} flex items-center justify-center text-2xl text-white mb-4 mx-auto`}
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.2 + 0.3 }}
+                  <div
+                    className={`w-12 h-12 rounded-xl bg-linear-to-r ${scope.color} flex items-center justify-center text-xl text-white mb-3 mx-auto transition-transform duration-300 group-hover:scale-110`}
                   >
                     {scope.icon}
-                  </motion.div>
+                  </div>
 
                   {/* Region Title */}
-                  <motion.h3
-                    className="text-2xl font-bold text-palladian mb-6"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.2 + 0.4 }}
-                  >
+                  <h3 className="text-xl font-bold text-palladian mb-4">
                     {scope.region}
-                  </motion.h3>
+                  </h3>
 
                   {/* Locations List */}
-                  <motion.div
-                    className="space-y-3"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.2 + 0.5 }}
-                  >
+                  <div className="space-y-2">
                     {scope.locations.map((location, locationIndex) => (
                       <motion.div
                         key={locationIndex}
-                        className="flex items-center justify-center gap-3 text-palladian/90 group/location"
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{
-                          duration: 0.4,
-                          delay: index * 0.2 + 0.6 + locationIndex * 0.1,
-                        }}
+                        className="flex items-center justify-center gap-2 text-palladian/90 group/location"
+                        variants={locationVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ delay: 0.2 + locationIndex * 0.06 }}
                       >
                         <div
-                          className={`w-2 h-2 rounded-full bg-linear-to-r ${scope.color} shrink-0`}
+                          className={`w-1.5 h-1.5 rounded-full bg-linear-to-r ${scope.color} shrink-0 transition-transform duration-300 group-hover/location:scale-125`}
                         />
-                        <span className="text-lg font-medium group-hover/location:text-burning-flame transition-colors duration-300">
+                        <span className="text-sm font-medium transition-colors duration-300 group-hover/location:text-burning-flame">
                           {location}
                         </span>
                       </motion.div>
                     ))}
-                  </motion.div>
+                  </div>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -320,64 +324,64 @@ const page = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "0px", amount: 0.1 }}
-            transition={{ duration: 0.8 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{
+              duration: 0.7,
+              ease: [0.25, 0.46, 0.45, 0.94] as const,
+            }}
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-4">
               انضم إلى قائمة عملائنا المميزين
             </h2>
-            <p className="text-lg text-palladian/70 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-palladian/70 mb-6 max-w-2xl mx-auto">
               دعنا نضيف إنجازاً جديداً إلى سجل إنجازاتك
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <motion.a
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+              {/* Phone Button */}
+              <a
                 href="tel:+963996320963"
-                className="bg-burning-flame text-blue-fantastic px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-transparent relative overflow-hidden group w-full sm:w-auto"
-                whileHover={{
-                  scale: 1.03,
-                }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 400 }}
+                className="bg-burning-flame text-blue-fantastic px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-burning-flame relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95"
               >
                 <span className="relative z-10">اتصل بنا الآن</span>
-                {/* Button Shine Effect */}
-                <motion.div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full w-full transition-transform duration-1000" />
-                {/* Pulse Effect */}
-                <motion.div
-                  className="absolute inset-0 border-2 border-burning-flame rounded-lg sm:rounded-xl"
-                  animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0.5, 0.8, 0.5],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                  }}
-                />
-              </motion.a>
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                <div className="absolute inset-0 border-2 border-burning-flame rounded-lg sm:rounded-xl animate-pulse-slow" />
+              </a>
 
-              <motion.a
+              {/* Projects Button */}
+              <a
                 href="/projects"
-                className="bg-blue-fantastic text-palladian px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-transparent relative overflow-hidden group w-full sm:w-auto"
-                whileHover={{
-                  scale: 1.03,
-                }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 400 }}
+                className="bg-blue-fantastic text-palladian px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-palladian relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95"
               >
                 <span className="relative z-10">شاهد مشاريعنا</span>
-                {/* Button Shine Effect */}
-                <motion.div className="absolute inset-0 bg-linear-to-r from-transparent via-palladian/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full w-full transition-transform duration-1000" />
-              </motion.a>
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-palladian/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+              </a>
             </div>
           </motion.div>
         </div>
       </section>
+
+      {/* Add custom animation for pulse */}
+      <style jsx>{`
+        @keyframes pulse-slow {
+          0%,
+          100% {
+            opacity: 0.3;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.6;
+            transform: scale(1.02);
+          }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 3s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 };
 
-export default page;
+export default Page;
