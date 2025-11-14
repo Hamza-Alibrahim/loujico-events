@@ -1,96 +1,100 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
+import CountUp from "react-countup";
+import { useTranslations } from "next-intl";
 
 const Page = () => {
+  const t = useTranslations("Team");
+
   const teamDepartments = [
     {
-      title: "مديرو مشاريع",
-      description: "ذوو خبرة على اعلى مستوى",
+      title: t("departments.managers.title"),
+      description: t("departments.managers.description"),
       icon: "👨‍💼",
       features: [
-        "إدارة المشاريع باحترافية عالية",
-        "تخطيط استراتيجي متكامل",
-        "متابعة دقيقة لسير العمل",
+        t("departments.managers.features.0"),
+        t("departments.managers.features.1"),
+        t("departments.managers.features.2"),
       ],
       color: "from-burning-flame to-orange-400",
     },
     {
-      title: "مصممون مبدعون",
-      description: "يحولون الأفكار إلى واقع",
+      title: t("departments.designers.title"),
+      description: t("departments.designers.description"),
       icon: "🎨",
       features: [
-        "تصميم مفاهيم إبداعية",
-        "تحويل الرؤى إلى تصاميم ملموسة",
-        "ابتكار حلول بصرية فريدة",
+        t("departments.designers.features.0"),
+        t("departments.designers.features.1"),
+        t("departments.designers.features.2"),
       ],
       color: "from-blue-fantastic to-blue-600",
     },
     {
-      title: "متخصصون في التسويق",
-      description: "يخلقون حملات فعالة",
+      title: t("departments.marketing.title"),
+      description: t("departments.marketing.description"),
       icon: "📈",
       features: [
-        "استراتيجيات تسويقية مبتكرة",
-        "تحليل السوق والمنافسة",
-        "حملات إعلانية مؤثرة",
+        t("departments.marketing.features.0"),
+        t("departments.marketing.features.1"),
+        t("departments.marketing.features.2"),
       ],
       color: "from-truffle-trouble to-red-600",
     },
     {
-      title: "مهندسو ديكور",
-      description: "يصممون مساحات إبداعية",
+      title: t("departments.decor.title"),
+      description: t("departments.decor.description"),
       icon: "🏗️",
       features: [
-        "تصميم المساحات بشكل إبداعي",
-        "دمج الجمالية مع الوظيفية",
-        "تنفيذ مفاهيم التصميم بدقة",
+        t("departments.decor.features.0"),
+        t("departments.decor.features.1"),
+        t("departments.decor.features.2"),
       ],
       color: "from-purple-500 to-purple-600",
     },
     {
-      title: "منسقو فعاليات",
-      description: "يديرون التفاصيل بدقة",
+      title: t("departments.coordinators.title"),
+      description: t("departments.coordinators.description"),
       icon: "📅",
       features: [
-        "تنظيم الفعاليات بكفاءة عالية",
-        "إدارة التفاصيل الدقيقة",
-        "ضمان سير الفعاليات بسلاسة",
+        t("departments.coordinators.features.0"),
+        t("departments.coordinators.features.1"),
+        t("departments.coordinators.features.2"),
       ],
       color: "from-green-500 to-emerald-600",
     },
     {
-      title: "مختصون في العلاقات الحكومية",
-      description: "يسهلون الإجراءات",
+      title: t("departments.government.title"),
+      description: t("departments.government.description"),
       icon: "🤝",
       features: [
-        "تسهيل الإجراءات الرسمية",
-        "بناء علاقات استراتيجية",
-        "متابعة التراخيص والتصاريح",
+        t("departments.government.features.0"),
+        t("departments.government.features.1"),
+        t("departments.government.features.2"),
       ],
-      color: "from-gray-600 to-gray-800",
+      color: "from-gray-500 to-gray-600",
     },
     {
-      title: "فريق علاقات",
-      description: "عالي الوصول",
+      title: t("departments.relations.title"),
+      description: t("departments.relations.description"),
       icon: "🌟",
       features: [
-        "شبكة علاقات واسعة النطاق",
-        "وصول استراتيجي للشركاء",
-        "بناء شراكات مستدامة",
+        t("departments.relations.features.0"),
+        t("departments.relations.features.1"),
+        t("departments.relations.features.2"),
       ],
       color: "from-yellow-500 to-yellow-600",
     },
   ];
 
   const teamStats = [
-    { number: "50+", label: "فريق متخصص", icon: "👥" },
-    { number: "10+", label: "سنوات خبرة متوسطة", icon: "⏳" },
-    { number: "95%", label: "رضا العملاء", icon: "⭐" },
-    { number: "24/7", label: "دعم متواصل", icon: "🔄" },
+    { number: 50, suffix: "+", label: t("stats.team"), icon: "👥" },
+    { number: 10, suffix: "+", label: t("stats.experience"), icon: "⏳" },
+    { number: 95, suffix: "%", label: t("stats.satisfaction"), icon: "⭐" },
+    { number: "24/7", label: t("stats.support"), icon: "🔄" },
   ];
 
-  // Optimized variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -146,8 +150,8 @@ const Page = () => {
       <section className="relative py-40 bg-linear-to-br from-blue-fantastic to-abyssal-blue text-palladian overflow-hidden">
         {/* PERFORMANCE: Static background elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-40 h-40 bg-burning-flame/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-20 w-32 h-32 bg-truffle-trouble/10 rounded-full blur-3xl" />
+          <div className="absolute top-20 ltr:left-20 rtl:right-20 w-40 h-40 bg-burning-flame/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 ltr:right-20 rtl:left-20 w-32 h-32 bg-truffle-trouble/10 rounded-full blur-3xl" />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -170,7 +174,7 @@ const Page = () => {
                 ease: [0.25, 0.46, 0.45, 0.94] as const,
               }}
             >
-              فريقنا
+              {t("title")}
             </motion.h1>
             <motion.p
               className="text-xl sm:text-2xl text-burning-flame font-semibold"
@@ -182,7 +186,7 @@ const Page = () => {
                 ease: "easeOut" as const,
               }}
             >
-              قوتنا الحقيقية... فريق عمل متميز
+              {t("subtitle")}
             </motion.p>
           </motion.div>
         </div>
@@ -202,11 +206,10 @@ const Page = () => {
             }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-4">
-              فريق العمل - قوتنا الحقيقية
+              {t("introduction.title")}
             </h2>
             <p className="text-lg text-palladian/70 leading-relaxed">
-              نخبة من الخبراء والمتخصصين الذين يجمعون بين الإبداع والخبرة لتحقيق
-              رؤى عملائنا وتحويل الأفكار إلى إنجازات ملموسة
+              {t("introduction.description")}
             </p>
           </motion.div>
 
@@ -245,8 +248,21 @@ const Page = () => {
                   </div>
 
                   {/* Number */}
-                  <div className="text-xl sm:text-2xl font-bold text-burning-flame mb-1 text-center">
-                    {stat.number}
+                  <div className="flex justify-center">
+                    {typeof stat.number === "number" ? (
+                      <CountUp
+                        className="text-xl sm:text-2xl font-bold text-burning-flame mb-2 text-center"
+                        end={stat.number}
+                        suffix={stat.suffix}
+                        duration={2.5}
+                        enableScrollSpy
+                        scrollSpyOnce
+                      />
+                    ) : (
+                      <span className="text-xl sm:text-2xl font-bold text-burning-flame mb-2 text-center">
+                        {stat.number}
+                      </span>
+                    )}
                   </div>
 
                   {/* Label */}
@@ -274,10 +290,10 @@ const Page = () => {
             }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-4">
-              تخصصات فريقنا
+              {t("departments.title")}
             </h2>
             <p className="text-lg text-palladian/70">
-              مجموعة متكاملة من المواهب والخبرات تعمل بتناغم لتحقيق التميز
+              {t("departments.description")}
             </p>
           </motion.div>
 
@@ -297,9 +313,9 @@ const Page = () => {
                   delay: Math.floor(index / 3) * 0.1 + (index % 3) * 0.05,
                 }}
               >
-                {/* Decorative Corner */}
+                {/* Decorative Corner - Dynamic positioning */}
                 <div
-                  className={`absolute top-0 right-0 w-16 h-16 bg-linear-to-br ${department.color} rounded-bl-3xl opacity-20`}
+                  className={`absolute top-0 ltr:left-0 rtl:right-0 w-16 h-16 bg-linear-to-br ${department.color} ltr:rounded-br-3xl rtl:rounded-bl-3xl opacity-20`}
                 />
 
                 {/* Department Header */}
@@ -360,53 +376,33 @@ const Page = () => {
             }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-4">
-              انضم إلى قائمة عملائنا المميزين
+              {t("cta.title")}
             </h2>
             <p className="text-lg text-palladian/70 mb-6 max-w-2xl mx-auto">
-              دع فريقنا المتميز يخدمك ويحول أفكارك إلى إنجازات حقيقية
+              {t("cta.description")}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               {/* Contact Button */}
-              <a
-                href="tel:+963996320963"
-                className="bg-burning-flame text-blue-fantastic px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-burning-flame relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                <span className="relative z-10">تواصل مع فريقنا</span>
-                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
-                <div className="absolute inset-0 border-2 border-burning-flame rounded-lg sm:rounded-xl animate-pulse-slow" />
-              </a>
+              <Link href={"/contact"} className="max-sm:w-full">
+                <button className="cursor-pointer bg-burning-flame text-blue-fantastic px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-burning-flame relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95">
+                  <span className="relative z-10">{t("cta.contact")}</span>
+                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                  <div className="absolute inset-0 border-2 border-burning-flame rounded-lg sm:rounded-xl animate-pulse-slow" />
+                </button>
+              </Link>
 
               {/* Projects Button */}
-              <a
-                href="/projects"
-                className="bg-blue-fantastic text-palladian px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-palladian relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                <span className="relative z-10">شاهد إنجازاتنا</span>
-                <div className="absolute inset-0 bg-linear-to-r from-transparent via-palladian/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
-              </a>
+              <Link href={"/achievements"} className="max-sm:w-full">
+                <button className="cursor-pointer bg-blue-fantastic text-palladian px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-palladian relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95">
+                  <span className="relative z-10">{t("cta.achievements")}</span>
+                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-palladian/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                </button>
+              </Link>
             </div>
           </motion.div>
         </div>
       </section>
-
-      {/* Add custom animation for pulse */}
-      <style jsx>{`
-        @keyframes pulse-slow {
-          0%,
-          100% {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.6;
-            transform: scale(1.02);
-          }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 3s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   );
 };

@@ -1,9 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import CountUp from "react-countup";
+import { useTranslations } from "next-intl";
 
 const Page = () => {
-  // Optimized variants for better performance
+  const t = useTranslations("About");
+
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -41,6 +44,46 @@ const Page = () => {
     },
   };
 
+  const stats = [
+    { number: 200, suffix: "+", label: t("stats.projects"), icon: "🚀" },
+    { number: 50, suffix: "+", label: t("stats.team"), icon: "👥" },
+    { number: 95, suffix: "%", label: t("stats.satisfaction"), icon: "⭐" },
+    { number: 5, suffix: "+", label: t("stats.experience"), icon: "⏱️" },
+  ];
+
+  const values = [
+    {
+      title: t("values.innovation.title"),
+      icon: "💡",
+      description: t("values.innovation.description"),
+      color: "from-burning-flame to-orange-400",
+    },
+    {
+      title: t("values.precision.title"),
+      icon: "🎯",
+      description: t("values.precision.description"),
+      color: "from-blue-fantastic to-blue-600",
+    },
+    {
+      title: t("values.transparency.title"),
+      icon: "🔍",
+      description: t("values.transparency.description"),
+      color: "from-green-500 to-emerald-600",
+    },
+    {
+      title: t("values.punctuality.title"),
+      icon: "⏰",
+      description: t("values.punctuality.description"),
+      color: "from-purple-500 to-purple-600",
+    },
+    {
+      title: t("values.quality.title"),
+      icon: "⭐",
+      description: t("values.quality.description"),
+      color: "from-truffle-trouble to-red-600",
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Hero Section */}
@@ -71,7 +114,7 @@ const Page = () => {
                 ease: [0.25, 0.46, 0.45, 0.94] as const,
               }}
             >
-              عن الشركة
+              {t("title")}
             </motion.h1>
             <motion.p
               className="text-xl sm:text-2xl text-burning-flame font-semibold"
@@ -83,7 +126,7 @@ const Page = () => {
                 ease: "easeOut" as const,
               }}
             >
-              نصنع الفرق من خلال التميز والإبداع
+              {t("subtitle")}
             </motion.p>
           </motion.div>
         </div>
@@ -96,14 +139,14 @@ const Page = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto mb-16">
             {/* Vision Card */}
             <motion.div
-              className="bg-blue-fantastic rounded-2xl shadow-xl border border-palladian/20 p-6 sm:p-8 relative overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+              className="bg-blue-fantastic rounded-2xl shadow-xl border border-palladian/20 p-6 sm:p-8 relative overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 ltr:text-left"
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
             >
-              {/* Decorative Element */}
-              <div className="absolute top-0 right-0 w-16 h-16 sm:w-20 sm:h-20 bg-burning-flame/20 rounded-bl-3xl" />
+              {/* Decorative Element - Dynamic positioning based on direction */}
+              <div className="absolute top-0 ltr:left-0 rtl:right-0 w-16 h-16 sm:w-20 sm:h-20 bg-burning-flame/20 rtl:rounded-bl-3xl ltr:rounded-br-3xl" />
 
               <motion.div
                 className="text-3xl sm:text-4xl mb-4 sm:mb-6 text-burning-flame"
@@ -117,26 +160,25 @@ const Page = () => {
               </motion.div>
 
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-palladian mb-4 sm:mb-6">
-                رؤيتنا
+                {t("vision.title")}
               </h2>
 
               <p className="text-base sm:text-lg text-palladian/80 leading-relaxed">
-                أن نكون الشريك الأكثر ثقة وابتكاراً في صناعة الفعاليات والمعارض
-                محلياً وإقليمياً.
+                {t("vision.description")}
               </p>
             </motion.div>
 
             {/* Mission Card */}
             <motion.div
-              className="bg-blue-fantastic rounded-2xl shadow-xl border border-palladian/20 p-6 sm:p-8 relative overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+              className="bg-blue-fantastic rounded-2xl shadow-xl border border-palladian/20 p-6 sm:p-8 relative overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 ltr:text-left"
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: 0.1 }}
             >
-              {/* Decorative Element */}
-              <div className="absolute top-0 right-0 w-16 h-16 sm:w-20 sm:h-20 bg-truffle-trouble/20 rounded-bl-3xl" />
+              {/* Decorative Element - Dynamic positioning based on direction */}
+              <div className="absolute top-0 ltr:left-0 rtl:right-0 w-16 h-16 sm:w-20 sm:h-20 bg-truffle-trouble/20 rtl:rounded-bl-3xl ltr:rounded-br-3xl" />
 
               <motion.div
                 className="text-3xl sm:text-4xl mb-4 sm:mb-6 text-truffle-trouble"
@@ -150,13 +192,11 @@ const Page = () => {
               </motion.div>
 
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-palladian mb-4 sm:mb-6">
-                رسالتنا
+                {t("mission.title")}
               </h2>
 
               <p className="text-base sm:text-lg text-palladian/80 leading-relaxed">
-                تقديم حلول إبداعية شاملة تحول أفكار عملائنا إلى تجارب واقعية
-                استثنائية، من خلال فريق عمل محترف وتنفيذ دقيق واستخدام أحدث
-                التقنيات.
+                {t("mission.description")}
               </p>
             </motion.div>
           </div>
@@ -174,12 +214,7 @@ const Page = () => {
             }}
           >
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
-              {[
-                { number: "+200", label: "مشروع مكتمل", icon: "🚀" },
-                { number: "50+", label: "فريق متخصص", icon: "👥" },
-                { number: "95%", label: "رضا العملاء", icon: "⭐" },
-                { number: "5+", label: "سنوات خبرة", icon: "⏱️" },
-              ].map((stat, index) => (
+              {stats.map((stat, index) => (
                 <motion.div
                   key={index}
                   className="bg-blue-fantastic backdrop-blur-sm p-4 sm:p-5 rounded-xl border border-palladian/20 group relative overflow-hidden flex-1 min-w-[120px] sm:min-w-32 md:min-w-[150px] transition-all duration-300 hover:scale-105 hover:-translate-y-1"
@@ -198,8 +233,15 @@ const Page = () => {
                   </div>
 
                   {/* Number */}
-                  <div className="text-xl sm:text-2xl font-bold text-burning-flame mb-1 text-center">
-                    {stat.number}
+                  <div className="flex justify-center">
+                    <CountUp
+                      className="text-xl sm:text-2xl font-bold text-burning-flame mb-2 text-center"
+                      end={stat.number}
+                      suffix={stat.suffix}
+                      duration={2.5}
+                      enableScrollSpy
+                      scrollSpyOnce
+                    />
                   </div>
 
                   {/* Label */}
@@ -227,50 +269,13 @@ const Page = () => {
             }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-4">
-              ثقافة العمل
+              {t("culture.title")}
             </h2>
-            <p className="text-lg text-palladian/70">
-              قيمنا الأساسية التي تميزنا وترشدنا في كل ما نقوم به
-            </p>
+            <p className="text-lg text-palladian/70">{t("culture.subtitle")}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
-            {[
-              {
-                title: "الابتكار في كل ما نقدمه",
-                icon: "💡",
-                description:
-                  "نبحث دائماً عن طرق جديدة ومبتكرة لتقديم حلول فريدة",
-                color: "from-burning-flame to-orange-400",
-              },
-              {
-                title: "الدقة في التنفيذ",
-                icon: "🎯",
-                description:
-                  "نهتم بأدق التفاصيل لضمان الجودة والكمال في التنفيذ",
-                color: "from-blue-fantastic to-blue-600",
-              },
-              {
-                title: "الشفافية في التعامل",
-                icon: "🔍",
-                description: "الصراحة والوضوح أساس علاقتنا مع العملاء والشركاء",
-                color: "from-green-500 to-emerald-600",
-              },
-              {
-                title: "الالتزام بالمواعيد",
-                icon: "⏰",
-                description:
-                  "نحترم مواعيدنا ونلتزم بتسليم المشاريع في وقتها المحدد",
-                color: "from-purple-500 to-purple-600",
-              },
-              {
-                title: "الجودة في الخدمة",
-                icon: "⭐",
-                description:
-                  "نسعى للتميز في كل خدمة نقدمها لتجاوز توقعات العملاء",
-                color: "from-truffle-trouble to-red-600",
-              },
-            ].map((value, index) => (
+            {values.map((value, index) => (
               <motion.div
                 key={index}
                 className="bg-abyssal-blue rounded-xl shadow-lg border border-palladian/20 p-4 sm:p-5 group transition-all duration-300 hover:shadow-xl hover:-translate-y-1"

@@ -1,93 +1,96 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const Page = () => {
+  const t = useTranslations("Projects");
+
   const projects = [
     {
-      category: "مشاريع ضخمة",
+      category: t("categories.mega.title"),
       projects: [
         {
-          title: "نور الرياض - بوابة الدرعية",
-          description: "أكبر مهرجان ضوئي في المنطقة",
+          title: t("categories.mega.projects.0.title"),
+          description: t("categories.mega.projects.0.description"),
           icon: "✨",
           features: [
-            "تصميم وتنفيذ أكبر عرض ضوئي في المنطقة",
-            "إدارة الفعاليات الضخمة على مستوى عالمي",
-            "تنسيق العروض البصرية والصوتية المتكاملة",
+            t("categories.mega.projects.0.features.0"),
+            t("categories.mega.projects.0.features.1"),
+            t("categories.mega.projects.0.features.2"),
           ],
           color: "from-burning-flame to-orange-400",
         },
         {
-          title: "فورميلا 1 - الواجهة البحرية جدة",
-          description: "أكبر حدث رياضي دولي",
+          title: t("categories.mega.projects.1.title"),
+          description: t("categories.mega.projects.1.description"),
           icon: "🏎️",
           features: [
-            "تنظيم وإدارة الفعاليات المصاحبة للسباق",
-            "تصميم وتشغيل مناطق العرض والتجمع",
-            "تنسيق الخدمات اللوجستية للحدث الدولي",
+            t("categories.mega.projects.1.features.0"),
+            t("categories.mega.projects.1.features.1"),
+            t("categories.mega.projects.1.features.2"),
           ],
           color: "from-blue-fantastic to-blue-600",
         },
       ],
     },
     {
-      category: "معارض متخصصة",
+      category: t("categories.exhibitions.title"),
       projects: [
         {
-          title: "معرض الكتاب - جامعة الأميرة نورة",
-          description: "أكبر معرض كتاب جامعي",
+          title: t("categories.exhibitions.projects.0.title"),
+          description: t("categories.exhibitions.projects.0.description"),
           icon: "📚",
           features: [
-            "تصميم وتنظيم أكبر معرض كتاب على مستوى الجامعات",
-            "إدارة الفعاليات الثقافية المصاحبة",
-            "تنسيق مشاركة دور النشر والكتاب",
+            t("categories.exhibitions.projects.0.features.0"),
+            t("categories.exhibitions.projects.0.features.1"),
+            t("categories.exhibitions.projects.0.features.2"),
           ],
           color: "from-truffle-trouble to-red-600",
         },
         {
-          title: "معرض العطور - روشن اكسبو",
-          description: "تجربة شمية فريدة",
+          title: t("categories.exhibitions.projects.1.title"),
+          description: t("categories.exhibitions.projects.1.description"),
           icon: "🌸",
           features: [
-            "تصميم تجربة شمية تفاعلية فريدة",
-            "تنظيم مناطق العرض والتجارب الحسية",
-            "إدارة العلامات التجارية العالمية",
+            t("categories.exhibitions.projects.1.features.0"),
+            t("categories.exhibitions.projects.1.features.1"),
+            t("categories.exhibitions.projects.1.features.2"),
           ],
           color: "from-purple-500 to-purple-600",
         },
       ],
     },
     {
-      category: "مؤتمرات دولية",
+      category: t("categories.conferences.title"),
       projects: [
         {
-          title: "المؤتمر السعودي الصيني",
-          description: "مؤتمر اقتصادي رفيع المستوى",
+          title: t("categories.conferences.projects.0.title"),
+          description: t("categories.conferences.projects.0.description"),
           icon: "🤝",
           features: [
-            "تنظيم مؤتمر اقتصادي دولي رفيع المستوى",
-            "إدارة جلسات الحوار والتفاوض",
-            "تنسيق الخدمات للوفود الرسمية",
+            t("categories.conferences.projects.0.features.0"),
+            t("categories.conferences.projects.0.features.1"),
+            t("categories.conferences.projects.0.features.2"),
           ],
           color: "from-green-500 to-emerald-600",
         },
         {
-          title: "بلاك هات",
-          description: "مؤتمر تقني متخصص",
+          title: t("categories.conferences.projects.1.title"),
+          description: t("categories.conferences.projects.1.description"),
           icon: "💻",
           features: [
-            "تنظيم مؤتمر تقني متخصص في الأمن السيبراني",
-            "إدارة ورش العمل والجلسات التقنية",
-            "تنسيق مشاركة الخبراء الدوليين",
+            t("categories.conferences.projects.1.features.0"),
+            t("categories.conferences.projects.1.features.1"),
+            t("categories.conferences.projects.1.features.2"),
           ],
-          color: "from-gray-600 to-gray-800",
+          color: "from-gray-500 to-gray-600",
         },
       ],
     },
   ];
 
-  // Optimized variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -141,8 +144,8 @@ const Page = () => {
       <section className="relative py-40 bg-linear-to-br from-blue-fantastic to-abyssal-blue text-palladian overflow-hidden">
         {/* PERFORMANCE: Static background elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-40 h-40 bg-burning-flame/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-20 w-32 h-32 bg-truffle-trouble/10 rounded-full blur-3xl" />
+          <div className="absolute top-20 ltr:left-20 rtl:right-20 w-40 h-40 bg-burning-flame/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 ltr:right-20 rtl:left-20 w-32 h-32 bg-truffle-trouble/10 rounded-full blur-3xl" />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -165,7 +168,7 @@ const Page = () => {
                 ease: [0.25, 0.46, 0.45, 0.94] as const,
               }}
             >
-              مشاريعنا
+              {t("title")}
             </motion.h1>
             <motion.p
               className="text-xl sm:text-2xl text-burning-flame font-semibold"
@@ -177,7 +180,7 @@ const Page = () => {
                 ease: "easeOut" as const,
               }}
             >
-              إنجازات نفتخر بها... تجارب نصنعها
+              {t("subtitle")}
             </motion.p>
           </motion.div>
         </div>
@@ -197,11 +200,10 @@ const Page = () => {
             }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-4">
-              محفظة إنجازاتنا
+              {t("portfolio.title")}
             </h2>
             <p className="text-lg text-palladian/70">
-              مجموعة مختارة من أبرز مشاريعنا التي تعكس خبرتنا وتميزنا في صناعة
-              الفعاليات
+              {t("portfolio.description")}
             </p>
           </motion.div>
 
@@ -232,19 +234,19 @@ const Page = () => {
                   {category.projects.map((project, projectIndex) => (
                     <motion.div
                       key={projectIndex}
-                      className="bg-blue-fantastic rounded-2xl shadow-xl border border-palladian/20 p-5 sm:p-6 relative overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                      className="bg-blue-fantastic rounded-2xl shadow-xl border border-palladian/20 p-5 sm:p-6 relative overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 ltr:text-left"
                       variants={projectVariants}
                       transition={{
                         delay: categoryIndex * 0.15 + projectIndex * 0.08,
                       }}
                     >
-                      {/* Decorative Corner */}
+                      {/* Decorative Corner - Dynamic positioning */}
                       <div
-                        className={`absolute top-0 right-0 w-16 h-16 bg-linear-to-br ${project.color} rounded-bl-3xl opacity-20`}
+                        className={`absolute top-0 ltr:left-0 rtl:right-0 w-16 h-16 bg-linear-to-br ${project.color} ltr:rounded-br-3xl rtl:rounded-bl-3xl opacity-20`}
                       />
 
                       {/* Project Header */}
-                      <div className="flex items-start gap-3 mb-4">
+                      <div className="flex items-start gap-3 mb-4 relative z-10">
                         <div
                           className={`w-12 h-12 rounded-xl bg-linear-to-r ${project.color} flex items-center justify-center text-xl text-white shrink-0 transition-transform duration-300 group-hover:scale-110`}
                         >
@@ -304,43 +306,27 @@ const Page = () => {
             }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-4">
-              مستعد لبدء مشروعك القادم؟
+              {t("cta.title")}
             </h2>
             <p className="text-lg text-palladian/70 mb-6">
-              دعنا نصنع معاً تجربة استثنائية تليق بتميزك
+              {t("cta.description")}
             </p>
 
             {/* PERFORMANCE: CSS-based CTA button */}
-            <button className="bg-burning-flame text-blue-fantastic px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-burning-flame relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95">
-              <span className="relative z-10">اتصل بنا الآن</span>
+            <Link href={"/contact"}>
+              <button className="cursor-pointer bg-burning-flame text-blue-fantastic px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-burning-flame relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95">
+                <span className="relative z-10">{t("cta.button")}</span>
 
-              {/* CSS shine effect */}
-              <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                {/* CSS shine effect */}
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
 
-              {/* CSS pulse effect */}
-              <div className="absolute inset-0 border-2 border-burning-flame rounded-lg sm:rounded-xl animate-pulse-slow" />
-            </button>
+                {/* CSS pulse effect */}
+                <div className="absolute inset-0 border-2 border-burning-flame rounded-lg sm:rounded-xl animate-pulse-slow" />
+              </button>
+            </Link>
           </motion.div>
         </div>
       </section>
-
-      {/* Add custom animation for pulse */}
-      <style jsx>{`
-        @keyframes pulse-slow {
-          0%,
-          100% {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.6;
-            transform: scale(1.02);
-          }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 3s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   );
 };

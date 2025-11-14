@@ -2,9 +2,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
+import CountUp from "react-countup";
+import { useTranslations } from "next-intl";
 
 const Page = () => {
-  // Optimized variants for better performance
+  const t = useTranslations("home");
+
   const titleVariants = {
     hidden: { opacity: 0, y: 15 },
     visible: {
@@ -30,6 +34,23 @@ const Page = () => {
     },
   };
 
+  const stats = [
+    {
+      number: 200,
+      suffix: "+",
+      label: t("stats.successfulProjects"),
+      icon: "🚀",
+    },
+    {
+      number: 95,
+      suffix: "%",
+      label: t("stats.customerSatisfaction"),
+      icon: "⭐",
+    },
+    { number: 95, suffix: "%", label: t("stats.onTimeCompletion"), icon: "⏱️" },
+    { number: 50, suffix: "+", label: t("stats.specializedTeam"), icon: "👥" },
+  ];
+
   return (
     <section className="min-h-screen flex items-center justify-center bg-[linear-gradient(to_bottom,var(--blue-fantastic),var(--truffle-trouble),var(--burning-flame))] relative overflow-hidden">
       {/* PERFORMANCE: Reduced particles to 20 with optimized animations */}
@@ -37,17 +58,17 @@ const Page = () => {
         {[...Array(30)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-burning-flame/30 rounded-full" // Smaller and more transparent
+            className="absolute w-2 h-2 bg-burning-flame/30 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
             animate={{
               y: [0, -20, 0],
-              opacity: [0.3, 1, 0.7], // Reduced opacity range
+              opacity: [0.3, 1, 0.7],
             }}
             transition={{
-              duration: 8 + Math.random() * 6, // Slower for performance
+              duration: 8 + Math.random() * 6,
               repeat: Infinity,
               delay: Math.random() * 8,
               ease: "easeInOut",
@@ -85,20 +106,22 @@ const Page = () => {
           }}
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 px-2">
-            {"مؤسسة يوسف اللوجي التجارية".split(" ").map((word, index) => (
-              <motion.span
-                key={index}
-                variants={titleVariants}
-                initial="hidden"
-                animate="visible"
-                transition={{
-                  delay: index * 0.08, // Faster staggering
-                }}
-                className="inline-block ml-2"
-              >
-                {word}
-              </motion.span>
-            ))}
+            {t("title")
+              .split(" ")
+              .map((word, index) => (
+                <motion.span
+                  key={index}
+                  variants={titleVariants}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{
+                    delay: index * 0.08,
+                  }}
+                  className="inline-block ml-2"
+                >
+                  {word}
+                </motion.span>
+              ))}
           </h1>
         </motion.div>
 
@@ -113,7 +136,7 @@ const Page = () => {
           }}
         >
           <div className="text-lg sm:text-xl md:text-2xl text-burning-flame mb-6 sm:mb-8 font-semibold relative inline-block px-4">
-            شريكك في إدارة الفعاليات
+            {t("subtitle")}
             <motion.span
               className="absolute bottom-0 left-0 w-0 h-0.5 bg-burning-flame"
               initial={{ width: 0 }}
@@ -138,7 +161,7 @@ const Page = () => {
           }}
         >
           <p className="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed opacity-90 px-4 sm:px-6">
-            نحو آفاق إبداعية... حيث تصبح الأفكار واقعاً ملموساً
+            {t("description")}
           </p>
         </motion.div>
 
@@ -165,9 +188,7 @@ const Page = () => {
               }}
             />
             <p className="text-base sm:text-lg md:text-xl leading-relaxed sm:leading-loose">
-              &quot;مؤسسة يوسف اللوجي التجارية&quot; - شريكك الاستراتيجي نحو
-              التميز في إدارة الفعاليات والمعارض. نقدم حلولاً متكاملة تجمع بين
-              الإبداع والدقة لتحويل رؤيتك إلى تجربة استثنائية تترك أثراً دائماً.
+              {t("mission")}
             </p>
           </div>
         </motion.div>
@@ -194,16 +215,11 @@ const Page = () => {
               ease: "easeOut" as const,
             }}
           >
-            لماذا نحن الخيار الأمثل؟
+            {t("whyChooseUs")}
           </motion.h2>
 
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6">
-            {[
-              { number: "+200", label: "مشروع ناجح", icon: "🚀" },
-              { number: "95%", label: "معدل رضا العملاء", icon: "⭐" },
-              { number: "95%", label: "إنجاز في الوقت المحدد", icon: "⏱️" },
-              { number: "50+", label: "فريق عمل متخصص", icon: "👥" },
-            ].map((stat, index) => (
+            {stats.map((stat, index) => (
               <motion.div
                 key={index}
                 className="bg-palladian/10 backdrop-blur-sm p-4 sm:p-5 rounded-lg border border-palladian/20 group relative overflow-hidden flex-1 min-w-[120px] sm:min-w-32 md:min-w-40 transition-all duration-300 hover:scale-105 hover:-translate-y-2"
@@ -212,7 +228,7 @@ const Page = () => {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{
-                  delay: 0.3 + index * 0.1, // Faster staggering
+                  delay: 0.3 + index * 0.1,
                 }}
               >
                 <div className="absolute inset-0 bg-linear-to-br from-burning-flame/5 to-truffle-trouble/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -221,8 +237,15 @@ const Page = () => {
                   {stat.icon}
                 </div>
 
-                <div className="text-xl sm:text-2xl font-bold text-burning-flame mb-2 text-center">
-                  {stat.number}
+                <div className="flex justify-center">
+                  <CountUp
+                    className="text-xl sm:text-2xl font-bold text-burning-flame mb-2 text-center"
+                    end={stat.number}
+                    suffix={stat.suffix}
+                    duration={2.5}
+                    enableScrollSpy
+                    scrollSpyOnce
+                  />
                 </div>
 
                 <div className="text-palladian font-semibold text-xs sm:text-sm leading-tight text-center">
@@ -245,15 +268,17 @@ const Page = () => {
             ease: [0.25, 0.46, 0.45, 0.94] as const,
           }}
         >
-          <button className="bg-burning-flame text-blue-fantastic px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-burning-flame relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95">
-            <span className="relative z-10">تواصل معنا</span>
+          <Link href={"/contact"}>
+            <button className="cursor-pointer bg-burning-flame text-blue-fantastic px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-burning-flame relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95">
+              <span className="relative z-10">{t("cta")}</span>
 
-            {/* CSS-based shine effect */}
-            <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+              {/* CSS-based shine effect */}
+              <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
 
-            {/* CSS-based pulse effect */}
-            <div className="absolute inset-0 border-2 border-burning-flame rounded-lg sm:rounded-xl animate-pulse-slow" />
-          </button>
+              {/* CSS-based pulse effect */}
+              <div className="absolute inset-0 border-2 border-burning-flame rounded-lg sm:rounded-xl animate-pulse-slow" />
+            </button>
+          </Link>
         </motion.div>
       </div>
     </section>

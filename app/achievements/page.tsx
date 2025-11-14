@@ -1,76 +1,90 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
+import CountUp from "react-countup";
+import { useTranslations } from "next-intl";
 
 const Page = () => {
+  const t = useTranslations("Achievements");
+
   const achievements = [
     {
-      number: "95%",
-      label: "معدل رضا العملاء",
+      number: 95,
+      suffix: "%",
+      label: t("achievements.stats.0.label"),
       icon: "⭐",
-      description: "ثقة عملائنا هي شهادتنا الحقيقية على الجودة",
+      description: t("achievements.stats.0.description"),
       color: "from-burning-flame to-orange-400",
     },
     {
-      number: "90%",
-      label: "نسبة إنجاز المشاريع في الوقت المحدد",
+      number: 90,
+      suffix: "%",
+      label: t("achievements.stats.1.label"),
       icon: "⏱️",
-      description: "نلتزم بالمواعيد ونحترم وقت عملائنا",
+      description: t("achievements.stats.1.description"),
       color: "from-blue-fantastic to-blue-600",
     },
     {
-      number: "50+",
-      label: "فعالية ناجحة",
+      number: 50,
+      suffix: "+",
+      label: t("achievements.stats.2.label"),
       icon: "🎯",
-      description: "خبرة متراكمة في تنظيم الفعاليات بمختلف أحجامها",
+      description: t("achievements.stats.2.description"),
       color: "from-truffle-trouble to-red-600",
     },
     {
-      number: "200+",
-      label: "مشروع ناجح",
+      number: 200,
+      suffix: "+",
+      label: t("achievements.stats.3.label"),
       icon: "🚀",
-      description: "محفظة مشاريع غنية تشهد على خبرتنا الواسعة",
+      description: t("achievements.stats.3.description"),
       color: "from-purple-500 to-purple-600",
     },
     {
-      number: "100,000+",
-      label: "زائر في أكبر فعالية",
+      number: 100000,
+      suffix: "+",
+      label: t("achievements.stats.4.label"),
       icon: "👥",
-      description: "قدرة على إدارة الفعاليات الضخمة بأعلى معايير الجودة",
+      description: t("achievements.stats.4.description"),
       color: "from-green-500 to-emerald-600",
     },
   ];
 
   const geographicScope = [
     {
-      region: "محلياً",
+      region: t("geographic.local.title"),
       locations: [
-        "الرياض",
-        "جدة",
-        "مكة",
-        "المدينة المنورة",
-        "الدمام",
-        "الخبر",
-        "دمشق",
+        t("geographic.local.locations.0"),
+        t("geographic.local.locations.1"),
+        t("geographic.local.locations.2"),
+        t("geographic.local.locations.3"),
+        t("geographic.local.locations.4"),
+        t("geographic.local.locations.5"),
+        t("geographic.local.locations.6"),
       ],
       icon: "🏠",
       color: "from-burning-flame to-orange-400",
     },
     {
-      region: "إقليمياً",
-      locations: ["ماليزيا", "السعودية", "الإمارات", "سوريا"],
+      region: t("geographic.regional.title"),
+      locations: [
+        t("geographic.regional.locations.0"),
+        t("geographic.regional.locations.1"),
+        t("geographic.regional.locations.2"),
+        t("geographic.regional.locations.3"),
+      ],
       icon: "🌍",
       color: "from-blue-fantastic to-blue-600",
     },
     {
-      region: "عالمياً",
-      locations: ["شراكات مع مؤسسات في أوروبا وأمريكا"],
+      region: t("geographic.global.title"),
+      locations: [t("geographic.global.locations.0")],
       icon: "🌎",
       color: "from-truffle-trouble to-red-600",
     },
   ];
 
-  // Optimized variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -125,8 +139,8 @@ const Page = () => {
       <section className="relative py-40 bg-linear-to-br from-blue-fantastic to-abyssal-blue text-palladian overflow-hidden">
         {/* PERFORMANCE: Static background elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-40 h-40 bg-burning-flame/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-20 w-32 h-32 bg-truffle-trouble/10 rounded-full blur-3xl" />
+          <div className="absolute top-20 ltr:left-20 rtl:right-20 w-40 h-40 bg-burning-flame/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 ltr:right-20 rtl:left-20 w-32 h-32 bg-truffle-trouble/10 rounded-full blur-3xl" />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -149,7 +163,7 @@ const Page = () => {
                 ease: [0.25, 0.46, 0.45, 0.94] as const,
               }}
             >
-              إنجازاتنا
+              {t("title")}
             </motion.h1>
             <motion.p
               className="text-xl sm:text-2xl text-burning-flame font-semibold"
@@ -161,7 +175,7 @@ const Page = () => {
                 ease: "easeOut" as const,
               }}
             >
-              أرقام تدل على تميزنا... إنجازات تتحدث عن نفسها
+              {t("subtitle")}
             </motion.p>
           </motion.div>
         </div>
@@ -181,10 +195,10 @@ const Page = () => {
             }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-4">
-              أرقام تدل على تميزنا
+              {t("achievements.title")}
             </h2>
             <p className="text-lg text-palladian/70">
-              إحصائيات حقيقية تعكس حجم ثقة عملائنا ومدى التزامنا بالتميز
+              {t("achievements.description")}
             </p>
           </motion.div>
 
@@ -202,9 +216,9 @@ const Page = () => {
                 variants={achievementVariants}
                 transition={{ delay: index * 0.1 }}
               >
-                {/* Decorative Corner */}
+                {/* Decorative Corner - Dynamic positioning */}
                 <div
-                  className={`absolute top-0 right-0 w-16 h-16 bg-linear-to-br ${achievement.color} rounded-bl-3xl opacity-20`}
+                  className={`absolute top-0 ltr:left-0 rtl:right-0 w-16 h-16 bg-linear-to-br ${achievement.color} ltr:rounded-br-3xl rtl:rounded-bl-3xl opacity-20`}
                 />
 
                 {/* Achievement Content */}
@@ -217,9 +231,16 @@ const Page = () => {
                   </div>
 
                   {/* Number */}
-                  <h3 className="text-2xl sm:text-3xl font-bold text-burning-flame mb-1">
-                    {achievement.number}
-                  </h3>
+                  <div className="flex justify-center">
+                    <CountUp
+                      className="text-xl sm:text-2xl font-bold text-burning-flame mb-2 text-center"
+                      end={achievement.number}
+                      suffix={achievement.suffix}
+                      duration={2.5}
+                      enableScrollSpy
+                      scrollSpyOnce
+                    />
+                  </div>
 
                   {/* Label */}
                   <h4 className="text-lg font-bold text-palladian mb-2">
@@ -251,10 +272,10 @@ const Page = () => {
             }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-4">
-              نطاق عملنا الجغرافي
+              {t("geographic.title")}
             </h2>
             <p className="text-lg text-palladian/70">
-              انتشار عالمي يضمن وصول خدماتنا إلى كل مكان
+              {t("geographic.description")}
             </p>
           </motion.div>
 
@@ -272,9 +293,9 @@ const Page = () => {
                 variants={scopeVariants}
                 transition={{ delay: index * 0.15 }}
               >
-                {/* Decorative Corner */}
+                {/* Decorative Corner - Dynamic positioning */}
                 <div
-                  className={`absolute top-0 right-0 w-16 h-16 bg-linear-to-br ${scope.color} rounded-bl-3xl opacity-20`}
+                  className={`absolute top-0 ltr:left-0 rtl:right-0 w-16 h-16 bg-linear-to-br ${scope.color} ltr:rounded-br-3xl rtl:rounded-bl-3xl opacity-20`}
                 />
 
                 {/* Scope Content */}
@@ -333,53 +354,33 @@ const Page = () => {
             }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-palladian mb-4">
-              انضم إلى قائمة عملائنا المميزين
+              {t("cta.title")}
             </h2>
             <p className="text-lg text-palladian/70 mb-6 max-w-2xl mx-auto">
-              دعنا نضيف إنجازاً جديداً إلى سجل إنجازاتك
+              {t("cta.description")}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               {/* Phone Button */}
-              <a
-                href="tel:+963996320963"
-                className="bg-burning-flame text-blue-fantastic px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-burning-flame relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                <span className="relative z-10">اتصل بنا الآن</span>
-                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
-                <div className="absolute inset-0 border-2 border-burning-flame rounded-lg sm:rounded-xl animate-pulse-slow" />
-              </a>
+              <Link href={"/contact"} className="max-sm:w-full">
+                <button className="cursor-pointer bg-burning-flame text-blue-fantastic px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-burning-flame relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95">
+                  <span className="relative z-10">{t("cta.contact")}</span>
+                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                  <div className="absolute inset-0 border-2 border-burning-flame rounded-lg sm:rounded-xl animate-pulse-slow" />
+                </button>
+              </Link>
 
               {/* Projects Button */}
-              <a
-                href="/projects"
-                className="bg-blue-fantastic text-palladian px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-palladian relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                <span className="relative z-10">شاهد مشاريعنا</span>
-                <div className="absolute inset-0 bg-linear-to-r from-transparent via-palladian/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
-              </a>
+              <Link href="/projects" className="max-sm:w-full">
+                <button className="cursor-pointer bg-blue-fantastic text-palladian px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold border-2 border-palladian relative overflow-hidden group w-full sm:w-auto transition-all duration-300 hover:scale-105 active:scale-95">
+                  <span className="relative z-10">{t("cta.projects")}</span>
+                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-palladian/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+                </button>
+              </Link>
             </div>
           </motion.div>
         </div>
       </section>
-
-      {/* Add custom animation for pulse */}
-      <style jsx>{`
-        @keyframes pulse-slow {
-          0%,
-          100% {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.6;
-            transform: scale(1.02);
-          }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 3s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   );
 };

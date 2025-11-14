@@ -4,10 +4,14 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./LanguageSwitcher";
+import MobileLanguageSwitcher from "./MobileLanguageSwitcher";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const t = useTranslations("nav");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,13 +24,13 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { name: "الرئيسية", href: "/" },
-    { name: "عن الشركة", href: "/about" },
-    { name: "خدماتنا", href: "/services" },
-    { name: "مشاريعنا", href: "/projects" },
-    { name: "إنجازاتنا", href: "/achievements" },
-    { name: "فريقنا", href: "/team" },
-    { name: "اتصل بنا", href: "/contact" },
+    { name: t("home"), href: "/" },
+    { name: t("about"), href: "/about" },
+    { name: t("services"), href: "/services" },
+    { name: t("projects"), href: "/projects" },
+    { name: t("achievements"), href: "/achievements" },
+    { name: t("team"), href: "/team" },
+    { name: t("contact"), href: "/contact" },
   ];
 
   return (
@@ -49,27 +53,29 @@ const Navbar = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <motion.div
-                className="relative overflow-hidden group w-12 h-12 sm:w-14 sm:h-14"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              >
-                {/* SVG as Image */}
-                <img
-                  src="./logo.svg"
-                  alt="Logo"
-                  className="w-full h-full object-contain relative z-10 transition-all duration-300 group-hover:scale-110"
-                />
-              </motion.div>
+              <Link href="/">
+                <motion.div
+                  className="relative overflow-hidden group w-12 h-12 sm:w-14 sm:h-14"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400 }}
+                >
+                  {/* SVG as Image */}
+                  <img
+                    src="./logo.svg"
+                    alt="Logo"
+                    className="w-full h-full object-contain relative z-10 transition-all duration-300 group-hover:scale-110"
+                  />
+                </motion.div>
+              </Link>
             </motion.div>
 
             {/* Desktop Menu with Better Spacing */}
-            <div className="hidden md:flex items-center gap-8 lg:gap-12">
+            <div className="hidden lg:flex items-center gap-6 lg:gap-8">
               {navItems.map((item, index) => (
                 <Link key={item.name} href={item.href}>
                   <motion.button
-                    className="text-palladian hover:text-burning-flame transition-colors duration-300 font-medium relative py-2"
+                    className="text-palladian hover:text-burning-flame transition-colors duration-300 font-medium relative py-2 group"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
@@ -82,38 +88,58 @@ const Navbar = () => {
                   </motion.button>
                 </Link>
               ))}
+
+              {/* Desktop Language Switcher */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+              >
+                <LanguageSwitcher />
+              </motion.div>
             </div>
 
             {/* Mobile Menu Button */}
-            <motion.button
-              className="md:hidden flex flex-col space-y-1.5 p-2"
-              onClick={() => setIsOpen(!isOpen)}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <motion.span
-                className={`w-6 h-0.5 bg-palladian transition-all duration-300 ${
-                  isOpen ? "rotate-45 translate-y-2" : ""
-                }`}
-              />
-              <motion.span
-                className={`w-6 h-0.5 bg-palladian transition-all duration-300 ${
-                  isOpen ? "opacity-0" : "opacity-100"
-                }`}
-              />
-              <motion.span
-                className={`w-6 h-0.5 bg-palladian transition-all duration-300 ${
-                  isOpen ? "-rotate-45 -translate-y-2" : ""
-                }`}
-              />
-            </motion.button>
+            <div className="flex items-center gap-3 lg:hidden">
+              {/* Mobile Language Switcher */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <MobileLanguageSwitcher />
+              </motion.div>
+
+              <motion.button
+                className="flex flex-col space-y-1.5 p-2"
+                onClick={() => setIsOpen(!isOpen)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <motion.span
+                  className={`w-6 h-0.5 bg-palladian transition-all duration-300 ${
+                    isOpen ? "rotate-45 translate-y-2" : ""
+                  }`}
+                />
+                <motion.span
+                  className={`w-6 h-0.5 bg-palladian transition-all duration-300 ${
+                    isOpen ? "opacity-0" : "opacity-100"
+                  }`}
+                />
+                <motion.span
+                  className={`w-6 h-0.5 bg-palladian transition-all duration-300 ${
+                    isOpen ? "-rotate-45 -translate-y-2" : ""
+                  }`}
+                />
+              </motion.button>
+            </div>
           </div>
 
           {/* Mobile Menu with Better Spacing */}
           <motion.div
-            className={`md:hidden overflow-hidden ${
+            className={`lg:hidden overflow-hidden ${
               isOpen ? "block" : "hidden"
             } bg-blue-fantastic/95 backdrop-blur-lg border-t border-palladian/20`}
             initial={{ height: 0, opacity: 0 }}
