@@ -11,12 +11,12 @@ const MobileLanguageSwitcher = () => {
   const [isPending, startTransition] = useTransition();
 
   const getCurrentLocale = () => {
-    if (typeof document === "undefined") return "ar";
+    if (typeof document === "undefined") return "en";
     const value = document.cookie
       .split("; ")
       .find((row) => row.startsWith("locale="))
       ?.split("=")[1];
-    return value || "ar";
+    return value || "en";
   };
 
   const currentLocale = getCurrentLocale();
@@ -32,8 +32,8 @@ const MobileLanguageSwitcher = () => {
   };
 
   const languages = [
-    { code: "ar", name: "العربية", flag: "🇸🇦" },
     { code: "en", name: "English", flag: "🇺🇸" },
+    { code: "ar", name: "العربية", flag: "🇸🇦" },
   ];
 
   const currentLanguage =
